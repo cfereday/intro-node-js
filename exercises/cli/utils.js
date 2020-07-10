@@ -25,7 +25,7 @@ const getContacts = () => {
  * @param {Object} contacts contacts object
  */
 const saveContacts = (contacts) => {
-  const stringifiedContacts = JSON.stringify(contacts);
+  const stringifiedContacts = JSON.stringify(contacts, null);
   fs.writeFileSync(contactsLocation, stringifiedContacts)
 };
 
