@@ -25,8 +25,9 @@ const getContacts = () => {
  * @param {Object} contacts contacts object
  */
 const saveContacts = (contacts) => {
-
-}
+  const stringifiedContacts = JSON.stringify(contacts);
+  fs.writeFileSync(contactsLocation, stringifiedContacts)
+};
 
 module.exports = {
   contactsLocation,
