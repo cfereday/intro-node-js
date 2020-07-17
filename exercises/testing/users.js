@@ -5,31 +5,52 @@ const users = new Array(20).fill(0)
     createdAt: Date.now() + i,
     email: `readycoder${i}@gmail.com`
   }
-})
+});
+
+const matchUserId = (id) => {
+  if (id === undefined || id === null) {
+    return 'No match';
+  }
+
+  if (!users.includes(id)) {
+    return 'No match';
+  }
+
+  if (users.length === 20) {
+    return users.find(user =>  {
+      if (user.id === id) {
+        return user;
+      }
+    });
+  }
+};
+
+const fetchIdFromPath = (url) => {
+  return parseInt(url.split('/').pop());
+};
 
 // simulate async db call with promise
 const findUser = (id) => new Promise((resolve, reject) => {
-  const user = users.find(user => user.id === id)
-  if (user) {
+  const user = matchUserId(id);
+  if (user !== 'No match') {
     return resolve(user)
   }
   reject(new Error(`No user with id "${id}"`))
-})
+});
 
 // simulate async db call with promise
 const deleteUser = (id) => new Promise((resolve, reject) => {
-  const id = fixId(id)
-  const i = users.findIndex(user => user.id === id)
-
-  if (i < 0) {
-    return reject(new Error(`No user with id "${id}"`))
+  const id = matchUserId(id).id;
+  console.log('here is id', id);
+  if (id !== 'No match') {
+    resolve(id);
   }
-
-  users.slice(i, 1)
-  resolve({id})
-})
+  reject(new Error(`No user with id "${id}"`))
+});
 
 module.exports = {
   findUser,
-  deleteUser
-}
+  deleteUser,
+  matchUserId,
+  fetchIdFromPath
+};
