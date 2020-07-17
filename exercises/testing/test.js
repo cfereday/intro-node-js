@@ -5,6 +5,7 @@ describe('users', () => {
 
     test('should match users by their id', () => {
         const matchedUser = matchUserId(1);
+
         expect(matchedUser.id).toBe(1);
     });
 
@@ -12,13 +13,15 @@ describe('users', () => {
         const nullUser = matchUserId(null);
         const wrongIdUser = matchUserId(90);
         const stringUser = matchUserId('90');
-        expect(nullUser).toBe('No match');
-        expect(wrongIdUser).toBe('No match');
-        expect(stringUser).toBe('No match');
+
+        expect(nullUser).toBe(undefined);
+        expect(wrongIdUser).toBe(undefined);
+        expect(stringUser).toBe(undefined);
     });
 
     test('should fetch user from mock db', async () => {
         const result = await findUser(1);
+
         expect(result).toMatchObject({"id": 1, "email": 'readycoder1@gmail.com'});
     });
 
