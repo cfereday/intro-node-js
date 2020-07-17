@@ -25,8 +25,8 @@ const matchUserId = (id) => {
     }
 };
 
-const fetchIdFromPath = (url) => {
-    return parseInt(url.split('/').pop());
+const fetchIdFromPath = (id) => {
+    return parseInt(id);
 };
 
 // simulate async db call with promise

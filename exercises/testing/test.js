@@ -26,6 +26,6 @@ describe('users', () => {
     });
 
     test('should get the userid from the url path', () => {
-        expect(fetchIdFromPath('/user/4')).toBe(4);
+        expect(fetchIdFromPath('4')).toBe(4);
     });
 });
